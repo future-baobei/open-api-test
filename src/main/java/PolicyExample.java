@@ -21,8 +21,8 @@ public class PolicyExample {
     //    baobei-test
     static BaobeiClient baobeiClient = new BaobeiClient(
             "",
-            "YR10XaExwB7EjYRWwcn0KZA1Z4VYJ3Gb",
-            "https://test-h5.futurebaobei.com");
+            "",
+            "");
 
     public static void main(String[] args) throws Exception {
 //        outOrder();//出单
