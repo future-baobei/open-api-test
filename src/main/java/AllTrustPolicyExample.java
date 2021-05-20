@@ -12,9 +12,9 @@ import java.util.*;
 
 public class AllTrustPolicyExample {
 
-    static BaobeiClient baobeiClient = new BaobeiClient("r2T5e2txNOLgwy4f",
-            "YR10XaExwB7EjYRWwcn0KZA1Z4VYJ3Gb",
-            "https://test-h5.futurebaobei.com");
+    static BaobeiClient baobeiClient = new BaobeiClient("",
+            "",
+            "");
 
     public static void main(String[] args) throws Exception {
         Integer count = Integer.valueOf(args[0]);
