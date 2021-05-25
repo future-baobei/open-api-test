@@ -13,7 +13,14 @@
             "",
             "");
   ```
-* pom文件是需要的依赖，这些依赖目前也需要导入你的项目中。
-* lib目录下是保贝提供的sdk
+* 导入sdk，以下示例为maven，gradle示例请参考文档
+  ```
+  <dependency>
+    <groupId>com.futurebaobei</groupId>
+    <artifactId>open-api-sdk</artifactId>
+    <version>0.5</version>
+  </dependency>
+  ```
+* lib目录下的jar也是未来保贝的sdk，如果使用lib目录下的jar，需要将其pom文件所注释的依赖一并引入到项目
 
 # 感谢
