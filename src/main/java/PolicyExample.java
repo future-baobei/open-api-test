@@ -20,12 +20,12 @@ public class PolicyExample {
 
     //    baobei-test
     static BaobeiClient baobeiClient = new BaobeiClient(
-            "",
-            "",
-            "");
+            "ylFozgodTPuERDZ0",
+            "YR10XaExwB7EjYRWwcn0KZA1Z4VYJ3Gb",
+            "https://test-h5.futurebaobei.com");
 
     public static void main(String[] args) throws Exception {
-//        outOrder();//出单
+        outOrder();//出单
 //        queryOutOrder();//出单查询
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
