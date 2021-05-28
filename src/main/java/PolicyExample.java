@@ -2,6 +2,7 @@
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.futurebaobei.openapi.client.domain.BaobeiException;
 import com.futurebaobei.openapi.client.domain.BaobeiResponse;
 import com.futurebaobei.openapi.client.domain.policy.*;
 import com.futurebaobei.openapi.client.utils.BaobeiClient;
@@ -12,6 +13,7 @@ import generate.ChineseNameGenerator;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
@@ -20,17 +22,18 @@ public class PolicyExample {
 
     //    baobei-test
     static BaobeiClient baobeiClient = new BaobeiClient(
-            "ylFozgodTPuERDZ0",
-            "YR10XaExwB7EjYRWwcn0KZA1Z4VYJ3Gb",
-            "https://test-h5.futurebaobei.com");
+            "",
+            "",
+            "");
 
     public static void main(String[] args) throws Exception {
-        outOrder();//出单
+//        outOrder();//出单
 //        queryOutOrder();//出单查询
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
+//        claimByOutOrderNo(); // 只根据外部订单号获取权益url
+//        claimByPolicyHolderOutId(); // 根据投保人id获取权益url
 //        buyDrug();//获取权益url-买药
-//        refund();//退保
 //        update();//信息更新（更新投保人和被保人）
 //        updateInsurant();//信息更新（更新被保人）
 //        agentClaim();//代理人理赔页面
@@ -38,6 +41,8 @@ public class PolicyExample {
 //        uploadClaimImageData();//影像资料收集
 //        claimResult();
 //        queryPrivileges();
+//        getInsurantOssTemporaryUtl();//获取签名url
+//        getPolicyUrl();
     }
 
     private static void outOrder() throws Exception {
@@ -124,6 +129,32 @@ public class PolicyExample {
         }
     }
 
+    public static void claimByOutOrderNo() throws Exception {
+        OutOrderQueryVO claimRequest = new OutOrderQueryVO();
+        claimRequest.setOutOrderNo("test2");
+        claimRequest.setUrlPath("/openapi/channel/policy/claimByOutOrderNo");
+        BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
+        System.out.println(JSONObject.toJSON(baobeiResponse));
+        if (baobeiResponse.isSuccess()) {
+            //业务数据
+            ClaimResponse claimResponse = baobeiResponse.getDataObject();
+            System.out.println(claimResponse);
+        }
+    }
+
+    public static void claimByPolicyHolderOutId() throws Exception {
+        OutOrderQueryVO claimRequest = new OutOrderQueryVO();
+        claimRequest.setPolicyHolderOutId("e1b02663302043c38e40a0e9ea04878b");
+        claimRequest.setUrlPath("/openapi/channel/policy/claimByPolicyHolderOutId");
+        BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
+        System.out.println(JSONObject.toJSON(baobeiResponse));
+        if (baobeiResponse.isSuccess()) {
+            //业务数据
+            ClaimResponse claimResponse = baobeiResponse.getDataObject();
+            System.out.println(claimResponse);
+        }
+    }
+
 //    {"branchCompany":"branchCompany","productCode":"RYB","agentCode":"agentCode","channel":"channel","paymentTime":1612342448524,"insurants":[{"address":"address","occupation":"occupation","idCard":"360793199705030889","mobile":"13473503262","name":"卢母","postcode":"postcode","expireDate":"2025-01-01","outId":"dafb49f43c6f450598309f7fe6a08988","relationShip":3,"validPeriod":1,"email":"email"}],"outOrderNo":"5c51b705-2ae5-46ba-97f2-9c00c8adc227","policyHolder":{"address":"address","occupation":"occupation","idCard":"135848199409105415","mobile":"14550576667","name":"宇文弃","postcode":"postcode","expireDate":"2025-01-01","outId":"8eef4acc6ecb4860a5ce032fb0af65bb","validPeriod":1,"email":"email"}}
 
     public static void qa() throws Exception {
@@ -186,17 +217,6 @@ public class PolicyExample {
         }
     }
 
-    public static void refund() throws Exception {
-        RefundOrderRequest refundOrderRequest = new RefundOrderRequest();
-        refundOrderRequest.setOutOrderNo("cbf3727a-7ea1-4026-a16a-ef9ffdf85d41");
-        refundOrderRequest.setRefundTime(new Date());
-        refundOrderRequest.setUrlPath("/openapi/channel/policy/refund");
-        BaobeiResponse<RefundOrderResponse> baobeiResponse = baobeiClient.execute(refundOrderRequest);
-        System.out.println(JSONObject.toJSON(baobeiResponse));
-        if (baobeiResponse.isSuccess()) {
-//            退保没有业务参数，此时可以认为退保成功
-        }
-    }
 
     public static void update() throws Exception {
         UpdateOrderRequest request = new UpdateOrderRequest();
@@ -318,6 +338,18 @@ public class PolicyExample {
         System.out.println(baobeiResponse);
 
 
+    }
+
+    public static void getInsurantOssTemporaryUtl() throws Exception {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("https://insurance-oss.oss-cn-zhangjiakou.aliyuncs.com/guofu/claimauth/20210521/claim-applicant-guofu_2021052117313607640918.pdf");
+        BaobeiResponse<TemporaryUrlResponse> execute = baobeiClient.execute(TemporaryUrlRequest.builder().urls(list).build());
+        System.out.println("temp ======== " + execute.getDataObject().getUrls());
+    }
+
+    private static void getPolicyUrl() throws BaobeiException {
+        BaobeiResponse<AcquirePolicyResponse> execute = baobeiClient.execute(AcquirePolicyUrlRequest.builder().outOrderNo("ibaqoslzyk").build());
+        System.out.println("policyUrl ============== " + execute.getDataObject().getPolicyUrl());
     }
 
 }
