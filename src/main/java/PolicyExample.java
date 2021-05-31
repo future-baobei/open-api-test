@@ -1,5 +1,3 @@
-
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.futurebaobei.openapi.client.domain.BaobeiException;
@@ -9,7 +7,6 @@ import com.futurebaobei.openapi.client.utils.BaobeiClient;
 import generate.ChineseIDCardNumberGenerator;
 import generate.ChineseMobileNumberGenerator;
 import generate.ChineseNameGenerator;
-
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,8 +38,10 @@ public class PolicyExample {
 //        uploadClaimImageData();//影像资料收集
 //        claimResult();
 //        queryPrivileges();
-//        getInsurantOssTemporaryUtl();//获取签名url
+        getInsurantOssTemporaryUtl();//获取签名url
 //        getPolicyUrl();
+//        isRefund(); // 查询是否可以退保
+//        refund(); // 退保
     }
 
     private static void outOrder() throws Exception {
@@ -350,6 +349,24 @@ public class PolicyExample {
     private static void getPolicyUrl() throws BaobeiException {
         BaobeiResponse<AcquirePolicyResponse> execute = baobeiClient.execute(AcquirePolicyUrlRequest.builder().outOrderNo("ibaqoslzyk").build());
         System.out.println("policyUrl ============== " + execute.getDataObject().getPolicyUrl());
+    }
+
+    private static void isRefund() throws BaobeiException {
+        BaobeiResponse execute = baobeiClient.execute(RefundOrderQueryRequest.builder()
+                .outOrderNo("9f01bf82-144c-4d88-b710-f566d64a3ff2").build());
+        System.out.println("是否可以退保，code为 ============== " + execute.getCode());
+    }
+
+    public static void refund() throws Exception {
+        RefundOrderRequest refundOrderRequest = new RefundOrderRequest();
+        refundOrderRequest.setOutOrderNo("cbf3727a-7ea1-4026-a16a-ef9ffdf85d41");
+        refundOrderRequest.setRefundTime(new Date());
+        refundOrderRequest.setUrlPath("/openapi/channel/policy/refund");
+        BaobeiResponse<RefundOrderResponse> baobeiResponse = baobeiClient.execute(refundOrderRequest);
+        System.out.println(JSONObject.toJSON(baobeiResponse));
+        if (baobeiResponse.isSuccess()) {
+//            退保没有业务参数，此时可以认为退保成功
+        }
     }
 
 }
