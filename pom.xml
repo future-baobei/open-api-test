@@ -12,74 +12,56 @@
         <maven.compiler.source>1.7</maven.compiler.source>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>future-baobei</id>
-            <url>https://raw.github.com/future-baobei/mvn-repo/master/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <name>open-api-test</name>
     <url>http://maven.apache.org</url>
     <dependencies>
-        <!--    使用未来保贝私有仓库-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+<!--        com.google.guava:guava:26.0-jre-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+<!--        'org.apache.httpcomponents:httpclient:4.5.3'-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+<!--        compile 'com.alibaba:fastjson:1.2.60'-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.60</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.6.0</version>
+        </dependency>
         <dependency>
             <groupId>com.futurebaobei</groupId>
-            <artifactId>open-api-sdk</artifactId>
+            <artifactId>baobei-sdk</artifactId>
             <version>0.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/baobei-sdk-0.5.jar</systemPath>
         </dependency>
-        <!--    不使用私有仓库所需要的依赖-->
-        <!--    <dependency>-->
-        <!--      <groupId>junit</groupId>-->
-        <!--      <artifactId>junit</artifactId>-->
-        <!--      <version>3.8.1</version>-->
-        <!--      <scope>test</scope>-->
-        <!--    </dependency>-->
-        <!--    com.google.guava:guava:26.0-jre-->
-        <!--    <dependency>-->
-        <!--      <groupId>com.google.guava</groupId>-->
-        <!--      <artifactId>guava</artifactId>-->
-        <!--      <version>17.0</version>-->
-        <!--    </dependency>-->
-        <!--    'org.apache.httpcomponents:httpclient:4.5.3'-->
-        <!--    <dependency>-->
-        <!--      <groupId>org.apache.httpcomponents</groupId>-->
-        <!--      <artifactId>httpclient</artifactId>-->
-        <!--      <version>4.5.2</version>-->
-        <!--    </dependency>-->
-        <!--    compile 'com.alibaba:fastjson:1.2.60'-->
-        <!--    <dependency>-->
-        <!--      <groupId>com.alibaba</groupId>-->
-        <!--      <artifactId>fastjson</artifactId>-->
-        <!--      <version>1.2.60</version>-->
-        <!--    </dependency>-->
-        <!--    <dependency>-->
-        <!--      <groupId>com.aliyun.oss</groupId>-->
-        <!--      <artifactId>aliyun-sdk-oss</artifactId>-->
-        <!--      <version>3.6.0</version>-->
-        <!--    </dependency>-->
-        <!--    <dependency>-->
-        <!--      <groupId>com.futurebaobei</groupId>-->
-        <!--      <artifactId>baobei-sdk</artifactId>-->
-        <!--      <version>0.5</version>-->
-        <!--      <scope>system</scope>-->
-        <!--      <systemPath>${project.basedir}/libs/baobei-sdk-0.5.jar</systemPath>-->
-        <!--    </dependency>-->
 
-        <!--    <dependency>-->
-        <!--      <groupId>org.apache.commons</groupId>-->
-        <!--      <artifactId>commons-lang3</artifactId>-->
-        <!--      <version>3.0</version>-->
-        <!--    </dependency>-->
-        <!--    <dependency>-->
-        <!--      <groupId>joda-time</groupId>-->
-        <!--      <artifactId>joda-time</artifactId>-->
-        <!--      <version>2.10.8</version>-->
-        <!--    </dependency>-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.10.8</version>
+        </dependency>
     </dependencies>
 
 </project>
