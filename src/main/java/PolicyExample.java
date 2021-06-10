@@ -10,10 +10,8 @@ import generate.ChineseNameGenerator;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.UUID;
+import java.io.InputStream;
+import java.util.*;
 
 public class PolicyExample {
 
@@ -38,7 +36,7 @@ public class PolicyExample {
 //        uploadClaimImageData();//影像资料收集
 //        claimResult();
 //        queryPrivileges();
-        getInsurantOssTemporaryUtl();//获取签名url
+        getInsurantOssTemporaryUrl();//获取签名url
 //        getPolicyUrl();
 //        isRefund(); // 查询是否可以退保
 //        refund(); // 退保
@@ -339,11 +337,14 @@ public class PolicyExample {
 
     }
 
-    public static void getInsurantOssTemporaryUtl() throws Exception {
+    public static void getInsurantOssTemporaryUrl() throws Exception {
         ArrayList<String> list = new ArrayList<>();
         list.add("https://insurance-oss.oss-cn-zhangjiakou.aliyuncs.com/guofu/claimauth/20210521/claim-applicant-guofu_2021052117313607640918.pdf");
         BaobeiResponse<TemporaryUrlResponse> execute = baobeiClient.execute(TemporaryUrlRequest.builder().urls(list).build());
-        System.out.println("temp ======== " + execute.getDataObject().getUrls());
+        List<String> urls = execute.getDataObject().getUrls();
+        System.out.println("temp ======== " + urls);
+        //url转inputstream
+        List<InputStream> inputStreams = baobeiClient.downloadFiles(urls);
     }
 
     private static void getPolicyUrl() throws BaobeiException {
