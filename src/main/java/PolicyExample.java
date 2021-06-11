@@ -23,7 +23,7 @@ public class PolicyExample {
 
     public static void main(String[] args) throws Exception {
 //        outOrder();//出单
-//        queryOutOrder();//出单查询
+        queryOutOrder();//出单查询
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
 //        claimByOutOrderNo(); // 只根据外部订单号获取权益url
@@ -36,10 +36,34 @@ public class PolicyExample {
 //        uploadClaimImageData();//影像资料收集
 //        claimResult();
 //        queryPrivileges();
-        getInsurantOssTemporaryUrl();//获取签名url
+//        getInsurantOssTemporaryUrl();//获取签名url
 //        getPolicyUrl();
 //        isRefund(); // 查询是否可以退保
 //        refund(); // 退保
+//        freezePrivilege(); // 冻结权益
+//        cancelRefund(); // 取消退保
+    }
+
+    private static void cancelRefund() throws BaobeiException {
+        CancelFreezeRequest cancelFreezeRequest = new CancelFreezeRequest();
+        cancelFreezeRequest.setOutOrderNo("218600000010464688");
+        cancelFreezeRequest.setUrlPath("/openapi/channel/policy/cancelFreeze");
+        BaobeiResponse<CancelFreezeResponse> execute = baobeiClient.execute(cancelFreezeRequest);
+        System.out.println(JSONObject.toJSON(execute));
+        if (execute.isSuccess()) {
+            System.out.println("取消退保成功");
+        }
+    }
+
+    private static void freezePrivilege() throws BaobeiException {
+        FreezePrivilegeRequest freezePrivilegeRequest = new FreezePrivilegeRequest();
+        freezePrivilegeRequest.setOutOrderNo("ORDER20210610TXPLR");
+        freezePrivilegeRequest.setUrlPath("/openapi/channel/policy/freezePrivilege");
+        BaobeiResponse<FreezePrivilegeResponse> execute = baobeiClient.execute(freezePrivilegeRequest);
+        if (execute.isSuccess()) {
+            System.out.println("冻结权益成功");
+        }
+        System.out.println(JSONObject.toJSON(execute));
     }
 
     private static void outOrder() throws Exception {
@@ -204,7 +228,7 @@ public class PolicyExample {
 
     public static void queryOutOrder() throws Exception {
         QueryOrderRequest queryOrderRequest = new QueryOrderRequest();
-        queryOrderRequest.setOutOrderNo("59cc725f-278d-4ba2-bfaf-c60398ff8cd8");
+        queryOrderRequest.setOutOrderNo("218600000010464688");
         queryOrderRequest.setUrlPath("/openapi/channel/policy/query");
         BaobeiResponse<QueryOrderResponse> baobeiResponse = baobeiClient.execute(queryOrderRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
@@ -326,10 +350,10 @@ public class PolicyExample {
     public static void queryPrivileges() throws Exception {
         QueryPrivilegesRequest queryPrivilegesRequest = new QueryPrivilegesRequest();
         Insurant insurant = new Insurant();
-        insurant.setOutId("afb2bce11c494d74b80a6229b8385082");
+        insurant.setOutId("0000269222");
 
         queryPrivilegesRequest.setInsurant(insurant);
-        queryPrivilegesRequest.setOutOrderNo("5913de06-4c87-4e54-a32e-3c43efa087ec");
+        queryPrivilegesRequest.setOutOrderNo("218600000010464688");
         System.out.println(JSON.toJSONString(queryPrivilegesRequest));
         BaobeiResponse<QueryPrivilegesResponse> baobeiResponse = baobeiClient.execute(queryPrivilegesRequest);
         System.out.println(baobeiResponse);
@@ -354,13 +378,14 @@ public class PolicyExample {
 
     private static void isRefund() throws BaobeiException {
         BaobeiResponse execute = baobeiClient.execute(RefundOrderQueryRequest.builder()
-                .outOrderNo("9f01bf82-144c-4d88-b710-f566d64a3ff2").build());
+                .outOrderNo("ORDER20210610TXPLR").build());
+        System.out.println(JSONObject.toJSONString(execute));
         System.out.println("是否可以退保，code为 ============== " + execute.getCode());
     }
 
     public static void refund() throws Exception {
         RefundOrderRequest refundOrderRequest = new RefundOrderRequest();
-        refundOrderRequest.setOutOrderNo("cbf3727a-7ea1-4026-a16a-ef9ffdf85d41");
+        refundOrderRequest.setOutOrderNo("218600000010464688");
         refundOrderRequest.setRefundTime(new Date());
         refundOrderRequest.setUrlPath("/openapi/channel/policy/refund");
         BaobeiResponse<RefundOrderResponse> baobeiResponse = baobeiClient.execute(refundOrderRequest);
