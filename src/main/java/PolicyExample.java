@@ -28,7 +28,7 @@ public class PolicyExample {
 //        queryOutOrder();//出单查询
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
-        claimByOutOrderNo(); // 只根据外部订单号获取权益url
+//        claimByOutOrderNo(); // 只根据外部订单号获取权益url
 //        claimByPolicyHolderOutId(); // 根据投保人id获取权益url
 //        buyDrug();//获取权益url-买药
 //        update();//信息更新（更新投保人和被保人）
@@ -44,6 +44,7 @@ public class PolicyExample {
 //        refund(); // 退保
 //        freezePrivilege(); // 冻结权益
 //        cancelRefund(); // 取消退保
+//        claimApply();//理赔申请调用示例
     }
 
     private static void cancelRefund() throws BaobeiException {
