@@ -23,10 +23,10 @@ public class PolicyExample {
 
     public static void main(String[] args) throws Exception {
 //        outOrder();//出单
-        queryOutOrder();//出单查询
+//        queryOutOrder();//出单查询
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
-//        claimByOutOrderNo(); // 只根据外部订单号获取权益url
+        claimByOutOrderNo(); // 只根据外部订单号获取权益url
 //        claimByPolicyHolderOutId(); // 根据投保人id获取权益url
 //        buyDrug();//获取权益url-买药
 //        update();//信息更新（更新投保人和被保人）
@@ -75,6 +75,7 @@ public class PolicyExample {
         outOrderRequest.setAgentCode("agentCode");
         outOrderRequest.setChannel("channel");
         outOrderRequest.setBranchCompany("branchCompany");
+//        outOrderRequest.setActiveTime("2022-10-10 00:00:00");
 
         Insurant insurant = new Insurant();
         insurant.setOutId(UUID.randomUUID().toString().replace("-", ""));
@@ -152,7 +153,7 @@ public class PolicyExample {
 
     public static void claimByOutOrderNo() throws Exception {
         OutOrderQueryVO claimRequest = new OutOrderQueryVO();
-        claimRequest.setOutOrderNo("test2");
+        claimRequest.setOutOrderNo("ORDER20210618RLQJO");
         claimRequest.setUrlPath("/openapi/channel/policy/claimByOutOrderNo");
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
@@ -378,14 +379,14 @@ public class PolicyExample {
 
     private static void isRefund() throws BaobeiException {
         BaobeiResponse execute = baobeiClient.execute(RefundOrderQueryRequest.builder()
-                .outOrderNo("ORDER20210610TXPLR").build());
+                .outOrderNo("ORDER20210618RLQJO").build());
         System.out.println(JSONObject.toJSONString(execute));
         System.out.println("是否可以退保，code为 ============== " + execute.getCode());
     }
 
     public static void refund() throws Exception {
         RefundOrderRequest refundOrderRequest = new RefundOrderRequest();
-        refundOrderRequest.setOutOrderNo("218600000010464688");
+        refundOrderRequest.setOutOrderNo("ORDER20210618ZEFUC");
         refundOrderRequest.setRefundTime(new Date());
         refundOrderRequest.setUrlPath("/openapi/channel/policy/refund");
         BaobeiResponse<RefundOrderResponse> baobeiResponse = baobeiClient.execute(refundOrderRequest);
