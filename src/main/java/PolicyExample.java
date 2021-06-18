@@ -4,6 +4,8 @@ import com.futurebaobei.openapi.client.domain.BaobeiException;
 import com.futurebaobei.openapi.client.domain.BaobeiResponse;
 import com.futurebaobei.openapi.client.domain.policy.*;
 import com.futurebaobei.openapi.client.utils.BaobeiClient;
+import com.futurebaobei.openapi.client.utils.HttpClient;
+import com.futurebaobei.openapi.client.utils.SignUtils;
 import generate.ChineseIDCardNumberGenerator;
 import generate.ChineseMobileNumberGenerator;
 import generate.ChineseNameGenerator;
@@ -64,6 +66,7 @@ public class PolicyExample {
             System.out.println("冻结权益成功");
         }
         System.out.println(JSONObject.toJSON(execute));
+//        claimApply();//理赔申请调用示例
     }
 
     private static void outOrder() throws Exception {
@@ -75,7 +78,6 @@ public class PolicyExample {
         outOrderRequest.setAgentCode("agentCode");
         outOrderRequest.setChannel("channel");
         outOrderRequest.setBranchCompany("branchCompany");
-//        outOrderRequest.setActiveTime("2022-10-10 00:00:00");
 
         Insurant insurant = new Insurant();
         insurant.setOutId(UUID.randomUUID().toString().replace("-", ""));
@@ -153,7 +155,7 @@ public class PolicyExample {
 
     public static void claimByOutOrderNo() throws Exception {
         OutOrderQueryVO claimRequest = new OutOrderQueryVO();
-        claimRequest.setOutOrderNo("ORDER20210618RLQJO");
+        claimRequest.setOutOrderNo("test2");
         claimRequest.setUrlPath("/openapi/channel/policy/claimByOutOrderNo");
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
@@ -394,6 +396,21 @@ public class PolicyExample {
         if (baobeiResponse.isSuccess()) {
 //            退保没有业务参数，此时可以认为退保成功
         }
+    }
+
+    public static void claimApply() throws Exception {
+        String appId = "";
+        String appSecret = "";
+        String data = "";
+        String url = "";
+
+        HashMap<String, String> params = new HashMap();
+        params.put("appId", appId);
+        params.put("timestamp", String.valueOf(System.currentTimeMillis()));
+        params.put("data", data);
+        params.put("sign", SignUtils.sign(params, appSecret));
+        String response = new HttpClient().postRequestAsString(url, params, 10000, 10000);
+        System.out.println(response);
     }
 
 }
