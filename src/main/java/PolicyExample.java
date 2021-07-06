@@ -24,7 +24,7 @@ public class PolicyExample {
             "");
 
     public static void main(String[] args) throws Exception {
-//        outOrder();//出单
+        outOrder();//出单
 //        queryOutOrder();//出单查询
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
@@ -75,10 +75,11 @@ public class PolicyExample {
         String orderNo = UUID.randomUUID().toString();
         outOrderRequest.setOutOrderNo(orderNo);
         outOrderRequest.setOutPolicyNo(UUID.randomUUID().toString().replace("-", ""));
-        outOrderRequest.setProductCode("ALL_TRUST_BHYB");
+        outOrderRequest.setProductCode("DOCTOR_NIU_FAMILY_PLAN_B");
         outOrderRequest.setAgentCode("agentCode");
         outOrderRequest.setChannel("channel");
         outOrderRequest.setBranchCompany("branchCompany");
+//        outOrderRequest.setActiveTime("2022-10-10 00:00:00");
 
         Insurant insurant = new Insurant();
         insurant.setOutId(UUID.randomUUID().toString().replace("-", ""));
@@ -92,6 +93,9 @@ public class PolicyExample {
         insurant.setPostcode("postcode");
         insurant.setRelationShip(3);
         insurant.setCountry("country");
+        insurant.setProvince("120000");
+        insurant.setCity("120000");
+        insurant.setArea("120112");
 
         PolicyHolder policyHolder = new PolicyHolder();
         policyHolder.setOutId(UUID.randomUUID().toString().replace("-", ""));
@@ -104,9 +108,9 @@ public class PolicyExample {
         policyHolder.setEmail("email");
         policyHolder.setOccupation("occupation");
         policyHolder.setPostcode("postcode");
-        policyHolder.setProvince("province");
-        policyHolder.setCity("city");
-        policyHolder.setArea("area");
+        policyHolder.setProvince("110000");
+        policyHolder.setCity("110000");
+        policyHolder.setArea("110101");
         policyHolder.setAddress("address");
         policyHolder.setCountry("country");
 
@@ -246,7 +250,7 @@ public class PolicyExample {
     public static void update() throws Exception {
         UpdateOrderRequest request = new UpdateOrderRequest();
         Insurant insurant = new Insurant();
-        insurant.setOutId("386ad17c512e41988390b6f2dd2fb162");
+        insurant.setOutId("bf1ec4a07c8743a7bca516345e4556f4");
         insurant.setName(ChineseNameGenerator.getInstance().generate());
         insurant.setIdCard(ChineseIDCardNumberGenerator.getInstance().generate());
         insurant.setMobile(ChineseMobileNumberGenerator.getInstance().generate());
@@ -257,9 +261,12 @@ public class PolicyExample {
         insurant.setOccupation("occupation1");
         insurant.setPostcode("postcode1");
         insurant.setRelationShip(3);
+        insurant.setProvince("110000");
+        insurant.setCity("110000");
+        insurant.setArea("110101");
 
         PolicyHolder policyHolder = new PolicyHolder();
-        policyHolder.setOutId("46cdbe0338fe4360b06ebcaa8e95865d");
+        policyHolder.setOutId("577506b0a7db4ad79b4d5e9bb29c79bd");
         policyHolder.setName(ChineseNameGenerator.getInstance().generate());
         policyHolder.setIdCard(ChineseIDCardNumberGenerator.getInstance().generate());
         policyHolder.setMobile(ChineseMobileNumberGenerator.getInstance().generate());
@@ -269,9 +276,12 @@ public class PolicyExample {
         policyHolder.setEmail("email1");
         policyHolder.setOccupation("occupation1");
         policyHolder.setPostcode("postcode1");
+        policyHolder.setProvince("120000");
+        policyHolder.setCity("120000");
+        policyHolder.setArea("120112");
 
         request.setInsurants(Arrays.asList(insurant));
-        request.setOutOrderNo("9ace2e19-1607-45e6-9e80-b555b0d7dcd6");
+        request.setOutOrderNo("df638186-b84a-4488-b0af-b823682811f9");
         request.setDescription("");
         request.setPolicyHolder(policyHolder);
 
