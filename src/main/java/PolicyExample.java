@@ -24,13 +24,13 @@ public class PolicyExample {
             "");
 
     public static void main(String[] args) throws Exception {
-        outOrder();//出单
+//        outOrder();//出单
 //        queryOutOrder();//出单查询
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
 //        claimByOutOrderNo(); // 只根据外部订单号获取权益url
 //        claimByPolicyHolderOutId(); // 根据投保人id获取权益url
-//        buyDrug();//获取权益url-买药
+        buyDrug();//获取权益url-买药
 //        update();//信息更新（更新投保人和被保人）
 //        updateInsurant();//信息更新（更新被保人）
 //        agentClaim();//代理人理赔页面
@@ -133,7 +133,8 @@ public class PolicyExample {
 
     public static void claim() throws Exception {
         ClaimRequest claimRequest = new ClaimRequest();
-        claimRequest.setOutOrderNo("683e83a6-554b-4e1c-839a-eff17d70be30");
+        claimRequest.setOutOrderNo("218600000010464688");
+//        claimRequest.setRequestType("APP");
 //        PolicyHolder policyHolder = new PolicyHolder();
 //        policyHolder.setOutId("200258914621");
 //        policyHolder.setName(ChineseNameGenerator.getInstance().generate());
@@ -142,7 +143,7 @@ public class PolicyExample {
 //        claimRequest.setPolicyHolder(policyHolder);
 
         Insurant insurant = new Insurant();
-        insurant.setOutId("f16e50705c9b42789a1bd15183c2a5a0");
+        insurant.setOutId("0000269222");
 //        insurant.setName(ChineseNameGenerator.getInstance().generate());
 //        insurant.setIdCard(ChineseIDCardNumberGenerator.getInstance().generate());
 //        insurant.setMobile(ChineseMobileNumberGenerator.getInstance().generate());
@@ -159,8 +160,9 @@ public class PolicyExample {
     }
 
     public static void claimByOutOrderNo() throws Exception {
-        OutOrderQueryVO claimRequest = new OutOrderQueryVO();
-        claimRequest.setOutOrderNo("test2");
+        ClaimRequest claimRequest = new ClaimRequest();
+        claimRequest.setOutOrderNo("218600000010464688");
+//        claimRequest.setPlatform("APP");
         claimRequest.setUrlPath("/openapi/channel/policy/claimByOutOrderNo");
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
@@ -172,8 +174,9 @@ public class PolicyExample {
     }
 
     public static void claimByPolicyHolderOutId() throws Exception {
-        OutOrderQueryVO claimRequest = new OutOrderQueryVO();
-        claimRequest.setPolicyHolderOutId("e1b02663302043c38e40a0e9ea04878b");
+        ClaimRequest claimRequest = new ClaimRequest();
+        claimRequest.setPolicyHolderOutId("0000269529");
+//        claimRequest.setRequestType("APP");
         claimRequest.setUrlPath("/openapi/channel/policy/claimByPolicyHolderOutId");
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
@@ -188,9 +191,10 @@ public class PolicyExample {
 
     public static void qa() throws Exception {
         QARequest qaRequest = new QARequest();
-        qaRequest.setOutOrderNo("ecpic-user001");
+        qaRequest.setOutOrderNo("218600000010464688");
         qaRequest.setType("UPGRADE");
         qaRequest.setProblemId("121423542");
+//        qaRequest.setPlatform("APP");
 
 //        PolicyHolder policyHolder = new PolicyHolder();
 //        policyHolder.setOutId("f8897dc9-1a7d-4c67-8c1a-b42aaf3ae6a9");
@@ -202,7 +206,7 @@ public class PolicyExample {
 //        policyHolder.setMobile("15011111111");
 
         Insurant insurant = new Insurant();
-        insurant.setOutId("ecpic-user001");
+        insurant.setOutId("0000269222");
 //        insurant.setName(ChineseNameGenerator.getInstance().generate());
 //        insurant.setIdCard(ChineseIDCardNumberGenerator.getInstance().generate());
 //        insurant.setMobile(ChineseMobileNumberGenerator.getInstance().generate());
@@ -222,13 +226,13 @@ public class PolicyExample {
 
     public static void buyDrug() throws Exception {
         BuyDrugRequest buyDrugRequest = new BuyDrugRequest();
-        buyDrugRequest.setOutOrder("ecpic-user002");
+        buyDrugRequest.setOutOrder("218600000010464688");
         buyDrugRequest.setPrescriptionNo("CY2021022214454906698");
-        buyDrugRequest.setProblemId("13399292");
-        BaobeiResponse<BuyDrugResponse> baobeiResponse = baobeiClient.execute(buyDrugRequest);
+        buyDrugRequest.setProblemId("121423542");
+        BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(buyDrugRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
         if (baobeiResponse.isSuccess()) {
-            BuyDrugResponse buyDrugResponse = baobeiResponse.getDataObject();
+            ClaimResponse buyDrugResponse = baobeiResponse.getDataObject();
             System.out.println(buyDrugResponse);
         }
 
