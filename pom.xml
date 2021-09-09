@@ -5,6 +5,7 @@
     <artifactId>open-api-test</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
+    
 
     <properties>
         <!-- 这里的{jdk_version}填入你的jdk版本，我使用的是openjkd14 -->
