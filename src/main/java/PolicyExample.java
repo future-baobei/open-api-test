@@ -427,12 +427,12 @@ public class PolicyExample {
     }
 
     public static void qaQuery() throws Exception {
-        QaQueryRequest request = new QaQueryRequest();
+        QAQueryRequest request = new QAQueryRequest();
         request.setPartnerUserId("e49ea52b-3f79-44b6-9046-e708c0d02011");
-        BaobeiResponse<QaQueryResponse> baobeiResponse = baobeiClient.execute(request);
+        BaobeiResponse<QAQueryResponse> baobeiResponse = baobeiClient.execute(request);
         System.out.println(JSONObject.toJSON(baobeiResponse));
         if (baobeiResponse.isSuccess()) {
-            QaQueryResponse qaQueryResponse = baobeiResponse.getDataObject();
+            QAQueryResponse qaQueryResponse = baobeiResponse.getDataObject();
             System.out.println(qaQueryResponse);
         }
     }
