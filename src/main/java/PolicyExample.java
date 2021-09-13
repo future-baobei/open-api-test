@@ -19,14 +19,15 @@ public class PolicyExample {
 
     //    baobei-test
     static BaobeiClient baobeiClient = new BaobeiClient(
-            "",
-            "",
-            "https://test-h5.wlbb.net");
+            "b8If1CYGdaJFvePl",
+            "YR10XaExwB7EjYRWwcn0KZA1Z4VYJ3Gb",
+            "http://localhost:8080");
 
     public static void main(String[] args) throws Exception {
 //        outOrder();//出单
 //        queryOutOrder();//出单查询
-        queryOrder();
+//        queryOrder();
+        qaQuery();
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
 //        claimByOutOrderNo(); // 只根据外部订单号获取权益url
@@ -422,6 +423,17 @@ public class PolicyExample {
         if (baobeiResponse.isSuccess()) {
             OrderQueryResponse orderQueryResponse = baobeiResponse.getDataObject();
             System.out.println(orderQueryResponse);
+        }
+    }
+
+    public static void qaQuery() throws Exception {
+        QaQueryRequest request = new QaQueryRequest();
+        request.setPartnerUserId("e49ea52b-3f79-44b6-9046-e708c0d02011");
+        BaobeiResponse<QaQueryResponse> baobeiResponse = baobeiClient.execute(request);
+        System.out.println(JSONObject.toJSON(baobeiResponse));
+        if (baobeiResponse.isSuccess()) {
+            QaQueryResponse qaQueryResponse = baobeiResponse.getDataObject();
+            System.out.println(qaQueryResponse);
         }
     }
 
