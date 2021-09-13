@@ -21,16 +21,17 @@ public class PolicyExample {
     static BaobeiClient baobeiClient = new BaobeiClient(
             "",
             "",
-            "");
+            "https://test-h5.wlbb.net");
 
     public static void main(String[] args) throws Exception {
 //        outOrder();//出单
 //        queryOutOrder();//出单查询
+        queryOrder();
 //        claim();//获取权益url
 //        qa();//获取权益url-qa
 //        claimByOutOrderNo(); // 只根据外部订单号获取权益url
 //        claimByPolicyHolderOutId(); // 根据投保人id获取权益url
-        buyDrug();//获取权益url-买药
+//        buyDrug();//获取权益url-买药
 //        update();//信息更新（更新投保人和被保人）
 //        updateInsurant();//信息更新（更新被保人）
 //        agentClaim();//代理人理赔页面
@@ -413,6 +414,17 @@ public class PolicyExample {
         }
     }
 
+    public static void queryOrder() throws Exception {
+        OrderQueryRequest request = new OrderQueryRequest();
+        request.setOrderNo("2020071415150104100905");
+        BaobeiResponse<OrderQueryResponse> baobeiResponse = baobeiClient.execute(request);
+        System.out.println(JSONObject.toJSON(baobeiResponse));
+        if (baobeiResponse.isSuccess()) {
+            OrderQueryResponse orderQueryResponse = baobeiResponse.getDataObject();
+            System.out.println(orderQueryResponse);
+        }
+    }
+
     public static void claimApply() throws Exception {
         String appId = "";
         String appSecret = "";
@@ -427,5 +439,6 @@ public class PolicyExample {
         String response = new HttpClient().postRequestAsString(url, params, 10000, 10000);
         System.out.println(response);
     }
+
 
 }
