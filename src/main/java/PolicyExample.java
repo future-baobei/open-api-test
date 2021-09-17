@@ -164,7 +164,7 @@ public class PolicyExample {
     public static void claimByOutOrderNo() throws Exception {
         ClaimRequest claimRequest = new ClaimRequest();
         claimRequest.setOutOrderNo("218600000010464688");
-//        claimRequest.setPlatform("APP");
+        claimRequest.setPlatform("APP");
         claimRequest.setUrlPath("/openapi/channel/policy/claimByOutOrderNo");
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
@@ -178,7 +178,7 @@ public class PolicyExample {
     public static void claimByPolicyHolderOutId() throws Exception {
         ClaimRequest claimRequest = new ClaimRequest();
         claimRequest.setPolicyHolderOutId("0000269529");
-//        claimRequest.setRequestType("APP");
+        claimRequest.setPlatform("APP");
         claimRequest.setUrlPath("/openapi/channel/policy/claimByPolicyHolderOutId");
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(claimRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
@@ -231,6 +231,7 @@ public class PolicyExample {
         buyDrugRequest.setOutOrder("218600000010464688");
         buyDrugRequest.setPrescriptionNo("CY2021022214454906698");
         buyDrugRequest.setProblemId("121423542");
+        buyDrugRequest.setPlatform("APP");
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(buyDrugRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));
         if (baobeiResponse.isSuccess()) {
@@ -451,6 +452,5 @@ public class PolicyExample {
         String response = new HttpClient().postRequestAsString(url, params, 10000, 10000);
         System.out.println(response);
     }
-
 
 }
