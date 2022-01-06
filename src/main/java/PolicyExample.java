@@ -216,6 +216,9 @@ public class PolicyExample {
 
 //        claimRequest.setPolicyHolder(policyHolder);
         qaRequest.setInsurant(insurant);
+//        QAProblem qaProblem = new QAProblem();
+//        qaProblem.setAsk("test");
+//        qaRequest.setProblem(qaProblem);
 
         BaobeiResponse<ClaimResponse> baobeiResponse = baobeiClient.execute(qaRequest);
         System.out.println(JSONObject.toJSON(baobeiResponse));

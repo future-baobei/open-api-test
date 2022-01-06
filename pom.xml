@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.futurebaobei</groupId>
             <artifactId>baobei-sdk</artifactId>
-            <version>0.5.2</version>
+            <version>0.5.4</version>
         </dependency>
     </dependencies>
 
